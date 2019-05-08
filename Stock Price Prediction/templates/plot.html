@@ -1,0 +1,198 @@
+﻿<html>
+<head>
+    <meta charset="utf-8">
+    <title> Prediction Results </title>
+    <script src="/static/js/dygraph.js"></script>
+    <link rel="stylesheet" href="../static/style_result.css">
+    <link rel="stylesheet" href="/static/css/dygraph.css"/>
+</head>
+
+<body class = "bodyclass" >
+
+    <div class="topnav" >
+        <a href="/" class="homepage" style="color:White">Stockcast</a>
+    </div>
+
+    <h6>
+        <object class = "summary" data="../static/summary/{{stock_tinker}}.txt" style="width:85%; height:40%;" ></object>
+    </h6>
+        
+
+
+    <table class="print_details" align="center" >
+        <tr>
+
+            <td>
+                <font color="grey">{{ stock_tinker }}</font>
+            </td>
+                
+            <td>
+                <font color="grey">Last Closing Stock Value</font>
+            </td>
+
+            <td>
+                <font color="grey">Predicted Stock Value</font>
+            </td>
+
+        </tr>
+            
+        <tr>
+            <td></td>
+
+            <td>
+                <font color="grey">{{original}}</font>
+            </td>
+
+            <td>
+                <script type="text/javascript">
+
+                    if ({{forecast}} > {{original}})
+                        document.write("<center><b><font color=\"green\"><font size=\"5\">  {{forecast}}  </font><\/font></b></center>");
+                    else
+                        document.write("<center><b><font color=\"red\"><font size=\"5\">  {{forecast}}  </font><\/font></b></center>");
+                    //<font color="grey">{{forecast}}</font>
+
+                </script>
+            </td>
+            
+        </tr>
+
+    </table>
+
+
+    <script type="text/javascript">
+        if( {{original}} - {{forecast}} < 0)
+        {   
+            document.write("<center><b><font color=\"green\"><font size=\"5\">BUY</font><\/font></b></center>");
+                
+        }
+        else 
+        {
+            document.write("<center><b><font color=\"red\"><font size=\"5\">SELL - if stock is owned </font><\/font></b></center>");
+            //document.write("<center><b><font color=\"red\">Sell - if stock is owned<\/font></b></center>");
+            //document.write("<center><b><font color=\"green\">Short - if stock is not owned<\/font></b></center>")
+            document.write("<center><b><font color=\"green\"><font size=\"5\">SHORT - if stock is not owned</font><\/font></b></center>");
+        }        
+    </script>    
+
+
+    <table class="container">
+        <tr>
+            <td>
+                <div id="graph" style="width:1000px; height:500px;" class="graph"></div>
+            </td>
+            <td>
+                <div id="graphLegend" style="width:20px; height:3px;" class="graphbox"></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <div class = "labels">
+                    Show Data:
+                    <input type=checkbox id="0" checked onClick="change(this)">
+                        <label for="0"> <font color="008000">Actual</font></label>
+                    <input type=checkbox id="1" checked onClick="change(this)">
+                        <label for="1"> <font color="#000080">Forecasted</font></label>
+                </div>
+            </td>
+        </tr>
+    </table>
+          
+<script type="text/javascript">
+    g2 = new Dygraph(
+                     document.getElementById("graph"),
+                     // CSV or path to a CSV file.
+                     "{{ url_for('static', filename='numbers.csv') }}", // path to CSV file
+                     {
+                     visibility: [true, true],
+                     labelsDiv: document.getElementById("graphLegend")
+                     }          // options
+                     );
+     setStatus();
+                     
+     function setStatus() {
+                         document.getElementById("visibility").innerHTML =
+                         g2.visibility().toString();
+                     }
+    function change(el) {
+                        g2.setVisibility(parseInt(el.id), el.checked);
+                        setStatus();
+                     }
+</script>
+
+
+<div><marquee>
+    <table class="newsbox" scrollamount="1" >
+        <tr>
+            <td>
+                <div>
+                    <a style="display:block;color:black; width: 200px; margin-left: 20px" font-family: "Comic Sans MS" href="https://www.investors.com/market-trend/stock-market-today/dow-jones-futures-stock-market-china-trade-lyft-stock-match-stock/" target="_blank" ><font color="808080"><b>Dow Jones Futures: Stock Market Awaits China Trade News; 5 Big Earnings Movers.</font color></b></a>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <a style="display:block;color:black; width: 200px; margin-left: 20px" href="https://www.cnn.com/business/live-news/stock-market-news-today-050719/index.html" target="_blank" ><b><font color="808080">Stocks plunge on trade fears: May 7, 2019.</font></b></a>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <a style="display:block;color:black; width: 200px; margin-left: 20px" href="https://www.fool.com/investing/2019/05/07/3-top-dividend-stocks-to-buy-now.aspx" target="_blank" ><b><font color="808080">3 Top Dividend Stocks to Buy Now</font></b></a>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <a style="display:block;color:black; width: 200px; margin-left: 20px" href="https://www.fool.com/investing/2019/05/07/sorry-uber-youre-no-amazon.aspx " target="_blank" ><b><font color="808080">Sorry, Uber, You're No Amazon</font></b></a>
+                </div>
+                
+            </td>
+            <td>
+                <div>
+                    <a style="display:block;color:black; width: 200px; margin-left: 20px" href="https://markets.businessinsider.com/news/stocks/us-stocks-set-to-slide-as-trade-war-fears-mount-2019-5-1028175346" target="_blank" ><b><font color="808080">Stocks plunge as trade-war worries rattle investors</font></b></a>
+                </div>
+                
+            </td>
+        </tr>
+    </table>
+    </marquee>
+    <marquee direction = "right">
+    <table class="newsbox" scrollamount="1">
+        <tr>
+            <td>
+                <div>
+                    <a style="display:block;color:black; width: 200px; margin-left: 20px" href="https://www.nasdaq.com/article/deutsche-bank-to-iss-we-have-improved-our-risk-system-20190508-00025" target="_blank" ><b><font color="808080">Deutsche Bank to ISS: "We have improved our risk system"</font></b></a>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <a style="display:block;color:black; width: 200px; margin-left: 20px" href="https://www.nasdaq.com/article/is-it-bad-to-buy-a-stock-right-after-a-big-price-jump-cm1144599" target="_blank" ><b><font color="808080">Is It Bad to Buy a Stock Right After a Big Price Jump?</font></b></a>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <a style="display:block;color:black; width: 200px; margin-left: 20px" href="https://www.nasdaq.com/article/oil-rises-amid-us-sanctions-surging-china-crude-imports-20190508-00023" target="_blank" ><b><font color="808080">Oil rises amid U.S. sanctions, surging China crude imports</font></b></a>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <a style="display:block;color:black; width: 200px; margin-left: 20px" href="https://www.nasdaq.com/article/tencent-pulls-blockbuster-game-pubg-in-china-as-regulatory-approval-proves-elusive-20190508-00014" target="_blank" ><b><font color="808080">Tencent pulls blockbuster game PUBG in China as regulatory approval proves elusive</font></b></a>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <a style="display:block;color:black; width: 200px; margin-left: 20px" href="https://www.nasdaq.com/article/toyota-sees-smallerthanexpected-profit-rise-in-20192020-20190508-00011" target="_blank" ><b><font color="808080">Toyota sees smaller-than-expected profit rise in 2019/2020</font></b></a>
+                </div>  
+            </td>
+        </tr>
+    </table>
+    </marquee>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+

@@ -1,0 +1,26 @@
+﻿<!doctype html>
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title> Stock Value Prediction </title>
+		<link rel="stylesheet" href="../static/style.css">
+	</head>
+
+	<video playsinline autoplay muted loop id="bgvid">
+	    <source src="{{ url_for('static', filename='video/video1.mp4') }}" type="video/mp4">
+	</video>
+
+	<body>
+        <div>
+            
+            <form action=http://localhost:5000/plot method="POST">
+                <input type="text" name="companyname" placeholder="Enter ticker symbol" class="searchbox">
+                <input type="submit" name="Search" class="submit">
+            </form>
+            <a href="/" class="homepage">Stockcast</a>
+            <marquee class="bottombar">The forecast is based on Data Mining Algorithms.This version is for academic purpose alone. Stay tuned for further upgrade.;) Invest at your own risk :P </marquee>
+        </div>
+	</body>
+
+</html>
